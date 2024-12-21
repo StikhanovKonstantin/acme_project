@@ -15,6 +15,12 @@
               Калькулятор дней рождения
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link {% if view_name == 'birthday:birthday_list' %} active {% endif %}"
+              href="{% url 'birthday:birthday_list' %}">
+              Список дней рождения
+            </a>
+          </li>
         </ul>
       {% endwith %}
     </div>

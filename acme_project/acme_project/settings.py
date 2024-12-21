@@ -9,6 +9,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -17,6 +18,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'birthday.apps.BirthdayConfig',
     'pages.apps.PagesConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -31,11 +33,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'acme_project.urls'
 
+# Указываем, где хранятся шаблоны.
 TEMPLATES_DIR = BASE_DIR / 'templates'
+
+# Константа для хранения картинок.
+MEDIA_ROOT = BASE_DIR / 'media'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # В значении для ключа DIRS так же указываем,
+        # в какой дериктории искать все шаблоны.
         'DIRS': (TEMPLATES_DIR,),
         'APP_DIRS': True,
         'OPTIONS': {
@@ -51,6 +59,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'acme_project.wsgi.application'
 
+# Здесь указываем нужную базу данных.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -79,10 +88,20 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
+# Ссылка на статику.
 STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Константа для переопределения модели User.
+AUTH_USER_MODEL = 'users.CustomUser'
+
+# Подключаем бэкенд filebased.EmailBackend:
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# Указываем директорию, в которую будут сохраняться файлы писем:
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
