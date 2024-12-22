@@ -9,7 +9,7 @@ urlpatterns = [
         '', views.BirthdayCreateView.as_view(), name='create'
     ),
     path(
-        'list/', views.BirhdayListView.as_view(), name='birthday_list'
+        'list/', views.BirhdayListView.as_view(), name='list'
     ),
     path(
         '<int:pk>/edit/',
@@ -25,5 +25,10 @@ urlpatterns = [
         '<int:pk>',
         views.BirthdayDetailView.as_view(),
         name='detail'
+    ),
+    path(
+        '<int:pk>',
+        views.add_comment,
+        name='add_comment'
     )
 ]

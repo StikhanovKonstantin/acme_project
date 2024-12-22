@@ -6,7 +6,14 @@ SECRET_KEY = 'django-insecure-m&$lzdzkutvrbr5vt=jpm)7#g7cken_tk%($ty+w902n7wb#=e
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    # Когда проект будет опубликован и станет доступен для пользователей,
+    # в этот список нужно будет добавить и адреса домена,
+    # где он будет размещён,
+    # например 'acme.not' и 'www.acme.not'
+]
 
 INSTALLED_APPS = [
     'django_bootstrap5',
@@ -105,3 +112,12 @@ AUTH_USER_MODEL = 'users.CustomUser'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # Указываем директорию, в которую будут сохраняться файлы писем:
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+# Переадресация пользователя после входа в систему.
+LOGIN_REDIRECT_URL = 'pages:homepage'
+
+# name страницы для логина.
+LOGIN_URL = 'login'
+
+# Кастомная обработка ошибки 403.
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
